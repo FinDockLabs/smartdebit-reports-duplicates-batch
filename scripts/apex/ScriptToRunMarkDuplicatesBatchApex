@@ -1,0 +1,2 @@
+MarkDuplicateIRsBatch batch = new MarkDuplicateIRsBatch();
+Database.executebatch(batch, 200);
