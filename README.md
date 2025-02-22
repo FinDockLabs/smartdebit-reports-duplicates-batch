@@ -10,8 +10,7 @@ Although this project has 100% coverage, existing custom code in your environmen
 
 # FinDock Reconciliation Mark BACS IRs Duplicate
 
-This project helps mark BACS IRs as Duplicate when there are multiple reports with the same CheckSum value. All except the oldest record based on CreatedDate are set to a Duplicate status.
-
+With Smart Debit automated reports we poll for BACS reports daily, these reports will duplicate for a few days while they are still available within the poll request. We already ensure that no action is taken on duplicates. This project contains a Batch apex class that can be scheduled to run regularly and set Inbound Reports to a status of "Duplicate" so you can recognise them. 
 
 ## Full list of components
 
@@ -35,7 +34,7 @@ scripts/apex/ScriptToRunMarkDuplicatesBatchApex
 
 ## Configuration
 - Schedule the class "MarkDuplicateIrsBatchSchedule" to run on a regular basis. We recommend running this daily. 
-- To run this on a one-time basis, run the anonymous apex that you can find at the following path in this project - scripts/apex/ScriptToRunMarkDuplicatesBatchApex
+- To run this on a one-time basis : from the Developer Console, run the anonymous apex that you can find at the following path in this project - scripts/apex/ScriptToRunMarkDuplicatesBatchApex
 
 ## Contributing
 
