@@ -1,4 +1,4 @@
-<a href="https://githubsfdeploy.herokuapp.com?owner=FinDockLabs&repo=findock-reconciliation-markDuplicateIRsBACS&ref=main">
+<a href="https://githubsfdeploy.herokuapp.com?owner=FinDockLabs&repo=smartdebit-reports-duplicates-batch&ref=main">
   <img alt="Deploy to Salesforce"
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
@@ -8,9 +8,9 @@ NOTE: to be able to deploy this project to your Salesforce production environmen
 Although this project has 100% coverage, existing custom code in your environment might push the overall coverage below the threshold. 
 ```
 
-# FinDock Reconciliation Mark BACS IRs Duplicate
+# SmartDebit Reports Duplicates Batch
 
-With Smart Debit automated reports we poll for BACS reports daily, these reports will duplicate for a few days while they are still available within the poll request. We already ensure that no action is taken on duplicates. This project contains a Batch apex class that can be scheduled to run regularly and set Inbound Reports to a status of "Duplicate" so you can recognise them. 
+We poll for Smart Debit automated reports daily, these reports will duplicate for a few days while they are still available within the poll request. We already ensure that no action is taken on duplicates. This project contains a Batch apex class that can be scheduled to run regularly and set Inbound Reports to a status of "Duplicate" so you can recognise them. Duplicate reports are identified using the CheckSum and all except the oldest report (by CreatedDate) are marked as Duplicate. 
 
 ## Full list of components
 
@@ -26,6 +26,9 @@ classes/MarkDuplicateIrsBatchTest.cls
 **scripts**
 scripts/apex/ScriptToRunMarkDuplicatesBatchApex
 ```
+## Requirements
+
+BACS for FinDock package installed
 
 ## Installation
 - use `sfdx` to deploy a selection of or all components.
