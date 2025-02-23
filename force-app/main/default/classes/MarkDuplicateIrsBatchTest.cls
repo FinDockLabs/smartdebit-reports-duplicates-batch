@@ -79,10 +79,10 @@ private class MarkDuplicateIrsBatchTest {
             WHERE cpm__Checksum__c = 'CHK001'
             ORDER BY CreatedDate ASC
         ];
-        System.assertEquals(3, chk001Records.size(), 'There should be 3 records for CHK001');
-        System.assertEquals('Guided Review', chk001Records[0].cpm__Status__c, 'The oldest CHK001 record should remain in Guided Review');
-        System.assertEquals('Duplicate', chk001Records[1].cpm__Status__c, 'Subsequent CHK001 record should be marked Duplicate');
-        System.assertEquals('Duplicate', chk001Records[2].cpm__Status__c, 'Subsequent CHK001 record should be marked Duplicate');
+        Assert.areEqual(3, chk001Records.size(), 'There should be 3 records for CHK001');
+        Assert.areEqual('Guided Review', chk001Records[0].cpm__Status__c, 'The oldest CHK001 record should remain in Guided Review');
+        Assert.areEqual('Duplicate', chk001Records[1].cpm__Status__c, 'Subsequent CHK001 record should be marked Duplicate');
+        Assert.areEqual('Duplicate', chk001Records[2].cpm__Status__c, 'Subsequent CHK001 record should be marked Duplicate');
         
         // For CHK003, expect the first record remains 'Guided Review' and the second is marked as Duplicate.
         List<cpm__inbound_report__c> chk003Records = [
@@ -91,9 +91,9 @@ private class MarkDuplicateIrsBatchTest {
             WHERE cpm__Checksum__c = 'CHK003'
             ORDER BY CreatedDate ASC
         ];
-        System.assertEquals(2, chk003Records.size(), 'There should be 2 records for CHK003');
-        System.assertEquals('Guided Review', chk003Records[0].cpm__Status__c, 'The oldest CHK003 record should remain in Guided Review');
-        System.assertEquals('Duplicate', chk003Records[1].cpm__Status__c, 'The newer CHK003 record should be marked Duplicate');
+        Assert.areEqual(2, chk003Records.size(), 'There should be 2 records for CHK003');
+        Assert.areEqual('Guided Review', chk003Records[0].cpm__Status__c, 'The oldest CHK003 record should remain in Guided Review');
+        Assert.areEqual('Duplicate', chk003Records[1].cpm__Status__c, 'The newer CHK003 record should be marked Duplicate');
         
         // Ensure that records with unique checksums remain unchanged 
         cpm__inbound_report__c uniqueRecord = [
@@ -101,7 +101,7 @@ private class MarkDuplicateIrsBatchTest {
             WHERE cpm__Checksum__c = 'CHK002'
             LIMIT 1
         ];
-        System.assertEquals('Guided Review', uniqueRecord.cpm__Status__c, 'Unique record should remain unchanged');
+        Assert.areEqual('Guided Review', uniqueRecord.cpm__Status__c, 'Unique record should remain unchanged');
     }
     
 }

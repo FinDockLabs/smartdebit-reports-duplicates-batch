@@ -29,7 +29,7 @@ public class MarkDuplicateIrsBatchScheduleTest {
 
         // Schedule the job
         String jobId = System.schedule('Test Job', '0 0 0 1 * ?', new MarkDuplicateIrsBatchSchedule());
-        System.assertNotEquals(null, jobId, 'Scheduled job ID should not be null');
+        Assert.areNotEqual(null, jobId, 'Scheduled job ID should not be null');
         
         Test.startTest();
         // Execute the scheduled job
@@ -39,6 +39,6 @@ public class MarkDuplicateIrsBatchScheduleTest {
         
         // Verify batch execution
         Integer duplicateCount = [SELECT COUNT() FROM cpm__inbound_report__c WHERE cpm__Status__c = 'Duplicate'];
-        System.assert(duplicateCount == 1, 'One record should be marked as duplicate');
+        Assert.areEqual(1,duplicateCount, 'One record should be marked as duplicate');
     }
 }
