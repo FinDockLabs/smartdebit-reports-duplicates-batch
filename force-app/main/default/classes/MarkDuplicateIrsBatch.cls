@@ -1,23 +1,21 @@
-global class MarkDuplicateIrsBatch implements Database.Batchable<AggregateResult>{
-    global Iterable<AggregateResult> start(Database.BatchableContext bc){
+public class MarkDuplicateIrsBatch implements Database.Batchable<AggregateResult>{
+    public Iterable<AggregateResult> start(Database.BatchableContext bc){
         String query = 'SELECT cpm__Checksum__c,count(id) FROM cpm__inbound_report__c WHERE cpm__Status__c <> \'duplicate\' AND cpm__Checksum__c <> \'\'  AND cpm__report_type__c = \'BACS\' GROUP BY cpm__Checksum__c HAVING count(id)>1';
         return new AggregateResultIterable(query);
     } 
     
-    global void execute(Database.BatchableContext bc, List<sObject> scope){ 
-        System.debug('number of checksums:' + scope.size());
+    public void execute(Database.BatchableContext bc, List<sObject> scope){ 
+       
         List<AggregateResult> aggr = new List<AggregateResult>();
 
         for(sObject sObj : scope) {
             aggr.add((AggregateResult)sObj);
         }
-        System.debug(' COUNT : ' + aggr.size());
             
         List<String> badChecksums = new List<String>();
         for (AggregateResult ar : aggr) {
             badChecksums.add((String) ar.get('cpm__Checksum__c'));
         }
-        system.debug('Total number of checksums to process'+badChecksums.size());
         
         if (!badChecksums.isEmpty()) {
             // Query the IR records with duplicate checksums
@@ -39,7 +37,6 @@ global class MarkDuplicateIrsBatch implements Database.Batchable<AggregateResult
                 }
                 lastChecksum = ir.cpm__Checksum__c;
             }
-            System.debug('Number of IRs to update'+irsToMarkDuplicate.size());
             
             if (!irsToMarkDuplicate.isEmpty()) {
                 update irsToMarkDuplicate;
@@ -48,6 +45,6 @@ global class MarkDuplicateIrsBatch implements Database.Batchable<AggregateResult
     
     }
     
-    global void finish(Database.BatchableContext bc){ 
+    public void finish(Database.BatchableContext bc){ 
         System.debug('Batch processing completed');}
 }
