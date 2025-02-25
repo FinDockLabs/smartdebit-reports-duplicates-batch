@@ -1,11 +1,11 @@
-global class AggregateResultIterable implements Iterable<AggregateResult> {
+public class AggregateResultIterable implements Iterable<AggregateResult> {
   private String query;
 
-  global AggregateResultIterable(String soql){
+  public AggregateResultIterable(String soql){
     query = soql;
   }
 
-  global Iterator<AggregateResult> Iterator(){
+  public Iterator<AggregateResult> Iterator(){
     return new AggregateResultIterator(query);
   }
 }

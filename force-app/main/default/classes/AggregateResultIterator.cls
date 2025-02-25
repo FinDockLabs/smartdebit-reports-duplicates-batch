@@ -1,17 +1,17 @@
-global class AggregateResultIterator implements Iterator<AggregateResult> {
+public class AggregateResultIterator implements Iterator<AggregateResult> {
   AggregateResult [] results {get;set;}
   Integer index {get; set;} 
        
-  global AggregateResultIterator(String query) {
+  public AggregateResultIterator(String query) {
     index = 0;
     results = Database.query(query);            
   } 
 
-  global boolean hasNext(){ 
+  public boolean hasNext(){ 
     return results != null && !results.isEmpty() && index < results.size(); 
   }    
 
-  global AggregateResult next(){        
+  public AggregateResult next(){        
     return results[index++];            
   }       
 }
