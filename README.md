@@ -26,6 +26,11 @@ classes/MarkDuplicateIrsBatchTest.cls
 **scripts**
 scripts/apex/ScriptToRunMarkDuplicatesBatchApex
 ```
+
+## Contributors
+
+- Original idea by [Chris Boxall (FinDock)](https://www.linkedin.com/in/chris-boxall-4144b5a5/) Contact: `chris@findock.com`
+  
 ## Requirements
 
 BACS for FinDock package installed
